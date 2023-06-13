@@ -1,0 +1,18 @@
+#include <unistd.h>
+
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
+{
+	int	begin;
+
+	begin = 0;
+	while (dest[begin] != '\0')
+	{
+		begin++;
+	}
+	while (nb-- && (*src != '\0'))
+	{
+		dest[begin++] = *src++;
+	}
+	dest[begin] = '\0';
+	return (dest);
+}
