@@ -1,30 +1,26 @@
-#include <stdio.h>
 #include <stdlib.h>
 
-int    len(char *str)
+int    is_separator(char c,char *charset)
 {
-    int    i;
-
-    i = 0;
-    while (str[i] != '\0')
-        i++;
-    return (i);
+    int sep;
+    while (*charset && c)
+        if (c == *charset++)
+            return (1);
+    return c ? (0) :  (1);
 }
 
-char    *ft_strstr(char *str, char *to_find)
+int array_size(char *str, char *charset)
 {
-    int    j;
-
-    while (*str != '\0')
+    int size;
+    
+    size = 0;
+    while (*str)
     {
-        j = 0;
-        while (str[j] == to_find[j] && to_find[j] != '\0' && str[j] != '\0')
-            j++;
-        if (to_find[j] == '\0')
-            return (str);
+        if (!is_separator(*str, charset) && is_separator(*(str + 1), charset))
+            size++;
         str++;
     }
-    return (str);
+    return (size);
 }
 
 char    *copy(char *begin, char *end)
@@ -37,7 +33,7 @@ char    *copy(char *begin, char *end)
     buf = begin;
     while (buf++ != end)
         i++;
-    ptr = malloc(i + 1);
+    ptr = malloc((i + 1) * sizeof(char *));
     i = 0;
     while (begin++ != end)
     {
@@ -50,45 +46,34 @@ char    *copy(char *begin, char *end)
 char    **putstrs(char *str, char *charset, int size)
 {
     int        i;
-    char    **tmp;
-    char    *buf;
-
+    char    **res;
+    char  *begin;
+    char    *end;
+    
     i = 0;
-    tmp = (char **)malloc((size + 1) * sizeof(char *));
-    buf = str;
+    res = (char **)malloc((size + 1) * sizeof(char *));
+    res[size] = 0;
     while (i < size)
     {
-        buf = ft_strstr(buf, charset);
-        tmp[i++] = copy(str, buf);
-        buf += len(charset);
-        str = buf;
+        while (is_separator(*str, charset))
+          str++;
+        begin = str;
+        end = str;
+        while (!is_separator(*end, charset))
+          end++;
+        str = end;
+        res[i++] = copy(begin, end);
     }
-    tmp[i] = 0;
-    return (tmp);
+    return (res);
 }
 
 char    **ft_split(char *str, char *charset)
 {
-    int        size;
-    char    *buf;
-    char  *res;
-
-    size = 0;
-    buf = ft_strstr(str, charset);
-    while (*str)
-    {
-        size++;
-        if (!*buf)
-            break ;
-        while (buf == ft_strstr(buf, charset) || !(*buf)){
-          buf += len(charset);}
-        buf = ft_strstr(buf, charset);
-    }
-    return (putstrs(str, charset, size));
-}
-
-int main()
-{
-    char *str = ",,a,f,,";
-    char **a= ft_split(str, ",");
+    char   **tmp;
+    int    size;
+     
+    size = array_size(str, charset);
+    tmp = putstrs(str, charset, size);
+    return (tmp);
+     
 }
