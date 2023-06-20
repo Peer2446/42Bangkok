@@ -1,37 +1,94 @@
-// Online C compiler to run C program online
 #include <stdio.h>
 #include <stdlib.h>
-int countcharset(char *str, char *charset)
+
+int    len(char *str)
 {
-    int count;
-    int j;
-    
-    count = 0;
-    while (*str)
+    int    i;
+
+    i = 0;
+    while (str[i] != '\0')
+        i++;
+    return (i);
+}
+
+char    *ft_strstr(char *str, char *to_find)
+{
+    int    j;
+
+    while (*str != '\0')
     {
         j = 0;
-		while (str[j] == charset[j] && charset[j] && str[j])
-		{
-			j++;
-		}
-		if (charset[j] == '\0')
-			count++;
-		str++;
+        while (str[j] == to_find[j] && to_find[j] != '\0' && str[j] != '\0')
+            j++;
+        if (to_find[j] == '\0')
+            return (str);
+        str++;
     }
-    return (count);
+    return (str);
 }
-char **ft_split(char *str, char *charset)
+
+char    *copy(char *begin, char *end)
 {
-    int c;
-    char **tmp;
-    
-    tmp = malloc(countcharset(str, charset));
+    int        i;
+    char    *ptr;
+    char    *buf;
+
+    i = 0;
+    buf = begin;
+    while (buf++ != end)
+        i++;
+    ptr = malloc(i + 1);
+    i = 0;
+    while (begin++ != end)
+    {
+        ptr[i++] = *(begin - 1);
+    }
+    ptr[i] = '\0';
+    return (ptr);
+}
+
+char    **putstrs(char *str, char *charset, int size)
+{
+    int        i;
+    char    **tmp;
+    char    *buf;
+
+    i = 0;
+    tmp = (char **)malloc((size + 1) * sizeof(char *));
+    buf = str;
+    while (i < size)
+    {
+        buf = ft_strstr(buf, charset);
+        tmp[i++] = copy(str, buf);
+        buf += len(charset);
+        str = buf;
+    }
+    tmp[i] = 0;
     return (tmp);
+}
+
+char    **ft_split(char *str, char *charset)
+{
+    int        size;
+    char    *buf;
+    char  *res;
+
+    size = 0;
+    buf = ft_strstr(str, charset);
+    while (*str)
+    {
+        size++;
+        if (!*buf)
+            break ;
+        while (buf == ft_strstr(buf, charset) || !(*buf)){
+          buf += len(charset);}
+        buf = ft_strstr(buf, charset);
+    }
+    return (putstrs(str, charset, size));
 }
 
 int main()
 {
-    char *str = "aafe, fefsdf, gfeg, hhhh";
-    char **a= ft_split(str, ", ");
-    //printf("%d",countcharset(str,", "));
+    char *str = ",,a,f,,";
+    char **a= ft_split(str, ",");
 }
