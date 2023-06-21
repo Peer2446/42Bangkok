@@ -33,7 +33,7 @@ char    *copy(char *begin, char *end)
     buf = begin;
     while (buf++ != end)
         i++;
-    ptr = malloc((i + 1) * sizeof(char *));
+    ptr = (char *)malloc((i + 1) * sizeof(char));
     i = 0;
     while (begin++ != end)
     {
