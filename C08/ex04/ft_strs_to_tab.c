@@ -30,13 +30,13 @@ char	*ft_strdup(char *str)
 
 struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
-	t_stock_str	*stock;
+	struct s_stock_str	*stock;
 	int	i;        
 	
 	i = 0;
 	if (ac < 1)
 		return (0);
-	stock = (t_stock_str *)malloc((ac + 1) * sizeof(t_stock_str));
+	stock = malloc((ac + 1) * sizeof(t_stock_str));
 	if (!stock)
 		return (0);
 	while(ac--)
