@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/18 14:06:00 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/20 13:09:26 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+//#include <stdio.h>
 
-char	*ft_strcat(char *dest, char *src)
+char	*ft_strdup(char *src)
 {
-	int	begin;
+	int		i;
+	char	*ptr;
 
-	begin = 0;
-	while (dest[begin] != '\0')
+	i = 0;
+	while (src[i])
+		i++;
+	ptr = malloc(i + 1);
+	i = 0;
+	while (src[i])
 	{
-		begin++;
+		ptr[i] = src[i];
+		i++;
 	}
-	while (*src != '\0')
-	{
-		dest[begin++] = *src++;
-	}
-	dest[begin] = '\0';
-	return (dest);
+	ptr[i] = '\0';
+	return (ptr);
 }
+
+/*int	main()
+{
+	printf("%s",ft_strdup("abcde"));
+}*/

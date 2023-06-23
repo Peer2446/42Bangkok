@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_convert_base2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <wongamph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 14:10:27 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/19 13:02:01 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/19 13:26:01 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/23 15:06:42 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-//#include <stdio.h>
+// #include <stdio.h>
 
-int	ft_strlen(const char *s)
+int	len(char *s)
 {
 	int	i;
 
@@ -29,7 +28,7 @@ int	checkerror(char *base)
 	int	j;
 	int	lenbase;
 
-	lenbase = ft_strlen(base);
+	lenbase = len(base);
 	i = 0;
 	if (lenbase < 2)
 		return (1);
@@ -52,32 +51,47 @@ int	checkerror(char *base)
 	return (0);
 }
 
-void	ft_putnbr_base(int nbr, char *base)
+int	checkspace(char c)
 {
-	int	lenbase;
-
-	lenbase = ft_strlen(base);
-	if (checkerror(base) == 0)
-	{
-		if (nbr < 0)
-		{
-			write(1, "-", 1);
-			if (nbr <= -1 * lenbase)
-				ft_putnbr_base(-1 * (nbr / lenbase), base);
-			ft_putnbr_base((nbr % lenbase) * -1, base);
-		}
-		else if (nbr < lenbase)
-		{
-			write(1, &base[nbr], 1);
-		}
-		else
-		{
-			ft_putnbr_base(nbr / lenbase, base);
-			ft_putnbr_base(nbr % lenbase, base);
-		}
-	}
+	if (c == 32 || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
 }
-/*int main()
+
+int	cton(char c, char *base)
 {
-	ft_putnbr_base(-2, "01 ");
-}*/
+	int	i;
+
+	i = 0;
+	while (c != base[i] && base[i])
+		i++;
+	if (base[i] == '\0')
+		return (-1);
+	return (i);
+}
+
+int	ft_atoi_base(char *str, char *base)
+{
+	int	lenb;
+	int	i;
+	int	nb;
+	int	ngt;
+
+	lenb = len(base);
+	i = 0;
+	nb = 0;
+	ngt = 1;
+	if (checkerror(base))
+		return (0);
+	while (checkspace(*str) || *str == '+' || *str == '-')
+	{
+		if (*str++ == '-')
+			ngt *= -1;
+	}
+	while (cton(str[i], base) != -1)
+	{
+		nb = (nb * lenb) + cton(str[i], base);
+		i++;
+	}
+	return (ngt * nb);
+}

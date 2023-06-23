@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/11 15:43:14 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/12 10:38:38 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-char	*ft_strcat(char *dest, char *src)
+void	ft_putstr(char *str)
 {
-	int	begin;
+	int	i;
 
-	begin = 0;
-	while (dest[begin] != '\0')
+	i = 0;
+	while (str[i++] != '\0')
 	{
-		begin++;
+		write(1, &str[i - 1], 1);
 	}
-	while (*src != '\0')
-	{
-		dest[begin++] = *src++;
-	}
-	dest[begin] = '\0';
-	return (dest);
 }

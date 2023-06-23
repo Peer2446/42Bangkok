@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_print_program_name.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/16 16:47:21 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/18 11:39:48 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-char	*ft_strcat(char *dest, char *src)
+int	main(int argv, char *argc[])
 {
-	int	begin;
+	int	i;
 
-	begin = 0;
-	while (dest[begin] != '\0')
+	i = 0;
+	while (argv >= 1 && argc[0][i] != '\0')
 	{
-		begin++;
+		write(1, &argc[0][i], 1);
+		i++;
 	}
-	while (*src != '\0')
-	{
-		dest[begin++] = *src++;
-	}
-	dest[begin] = '\0';
-	return (dest);
+	write(1, "\n", 1);
 }

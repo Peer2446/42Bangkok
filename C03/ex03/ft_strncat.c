@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/13 12:31:46 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/13 12:34:56 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-char	*ft_strcat(char *dest, char *src)
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
 	int	begin;
 
@@ -21,7 +21,7 @@ char	*ft_strcat(char *dest, char *src)
 	{
 		begin++;
 	}
-	while (*src != '\0')
+	while (nb-- && (*src != '\0'))
 	{
 		dest[begin++] = *src++;
 	}

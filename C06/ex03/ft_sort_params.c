@@ -1,16 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_params.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/18 11:22:18 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/19 16:58:42 by wongamph         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
-#include <stdio.h>
+
 void	swap(char **a, char **b)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
-int	strcmp(char *s1, char *s2)
+
+int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
@@ -22,15 +35,16 @@ void	sort(int argv, char *argc[])
 {
 	int	i;
 	int	j;
-	if (argv == 1 )
+
+	if (argv == 1)
 		return ;
-	i = 0;
+	i = 1;
 	while (i < argv)
 	{
 		j = i + 1;
 		while (j < argv)
 		{
-			if (strcmp(argc[i] , argc[j]) > 0)
+			if (ft_strcmp(argc[i], argc[j]) > 0)
 				swap(argc + i, argc + j);
 			j++;
 		}
@@ -40,13 +54,20 @@ void	sort(int argv, char *argc[])
 
 int	main(int argv, char *argc[])
 {
+	int	i;
 	int	j;
 
-	j = 0;
+	i = 1;
 	sort(argv, argc);
-	while (j < argv)
+	while (i < argv)
 	{
-		printf("%s\n",argc[j]);
-		j++;	
+		j = 0;
+		while (argc[i][j] != '\0')
+		{
+			write(1, &argc[i][j], 1);
+			j++;
+		}
+		write(1, "\n", 1);
+		i++;
 	}
 }

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/20 17:16:41 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/20 18:36:35 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_H
+# define FT_H
 
-char	*ft_strcat(char *dest, char *src)
-{
-	int	begin;
+void	ft_putchar(char c);
+void	ft_swap(int *a, int *b);
+void	ft_putstr(char *str);
+int		ft_strlen(char *str);
+int		ft_strcmp(char *s1, char *s2);
 
-	begin = 0;
-	while (dest[begin] != '\0')
-	{
-		begin++;
-	}
-	while (*src != '\0')
-	{
-		dest[begin++] = *src++;
-	}
-	dest[begin] = '\0';
-	return (dest);
-}
+#endif FT_H

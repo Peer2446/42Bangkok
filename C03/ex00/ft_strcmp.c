@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wongamph <wongamph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/12 18:06:32 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/13 12:00:10 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-char	*ft_strcat(char *dest, char *src)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int	begin;
-
-	begin = 0;
-	while (dest[begin] != '\0')
+	while (*s1 != '\0' || *s2 != '\0')
 	{
-		begin++;
+		if (*s1 != *s2)
+		{
+			return ((int) *s1 - *s2);
+		}
+		s1++;
+		s2++;
 	}
-	while (*src != '\0')
-	{
-		dest[begin++] = *src++;
-	}
-	dest[begin] = '\0';
-	return (dest);
+	return (0);
 }

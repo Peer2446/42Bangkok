@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/18 17:32:43 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/18 18:00:18 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-char	*ft_strcat(char *dest, char *src)
+int	*ft_range(int min, int max)
 {
-	int	begin;
+	int		*range;
+	int		i;
 
-	begin = 0;
-	while (dest[begin] != '\0')
+	if (max <= min)
+		return (0);
+	i = 0;
+	range = malloc(max - min);
+	while (i < max - min)
 	{
-		begin++;
+		range[i] = i + min;
+		i++;
 	}
-	while (*src != '\0')
-	{
-		dest[begin++] = *src++;
-	}
-	dest[begin] = '\0';
-	return (dest);
+	return (range);
 }

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/18 17:55:49 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/23 14:39:57 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-char	*ft_strcat(char *dest, char *src)
+int	ft_ultimate_range(int **range, int min, int max)
 {
-	int	begin;
+	int		i;
+	int		*tmp;
 
-	begin = 0;
-	while (dest[begin] != '\0')
+	if (max <= min)
 	{
-		begin++;
+		*range = NULL;
+		return (0);
 	}
-	while (*src != '\0')
-	{
-		dest[begin++] = *src++;
-	}
-	dest[begin] = '\0';
-	return (dest);
+	tmp = (int *)malloc((max - min));
+	if (tmp == NULL)
+		return (-1);
+	i = -1;
+	while (++i < max - min)
+		tmp[i] = min + i;
+	*range = tmp;
+	return (i);
 }

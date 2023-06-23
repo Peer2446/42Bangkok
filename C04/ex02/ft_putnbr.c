@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wongamph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:26:19 by wongamph          #+#    #+#             */
-/*   Updated: 2023/06/13 12:30:45 by wongamph         ###   ########.fr       */
+/*   Created: 2023/06/10 17:39:30 by wongamph          #+#    #+#             */
+/*   Updated: 2023/06/11 14:08:09 by wongamph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-char	*ft_strcat(char *dest, char *src)
+void	p(char c)
 {
-	int	begin;
+	write(1, &c, 1);
+}
 
-	begin = 0;
-	while (dest[begin] != '\0')
+void	ft_putnbr(int nb)
+{
+	if (nb == -2147483648)
 	{
-		begin++;
+		write(1, "-2147483648", 11);
+		return ;
 	}
-	while (*src != '\0')
+	else if (nb < 0)
 	{
-		dest[begin++] = *src++;
+		nb *= -1;
+		p('-');
 	}
-	dest[begin] = '\0';
-	return (dest);
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+		p(nb % 10 + 48);
+	}
+	else
+	{
+		p(nb + 48);
+	}
 }
